@@ -1,30 +1,34 @@
+const TAX_RATE = 0.08;
+
+threshold = prompt("Enter spending threshold:");
+
 ac = prompt("Enter money in your account");
 ac = Number(ac);
 
-phone = prompt("Enter phone price");
-phone = Number(phone);
+total = Number(0);
 
-acc = prompt("Enter accessory price");
-acc = Number(acc);
-
-phone += acc;
-
-total = 0;
-
-while (ac - phone > 0) {
-  ac -= phone;
+while (total < ac) {
+  // buy a phone 
+  phone = prompt("Enter phone price");
+  phone = Number(phone);
   
-  total += Number(phone);
+  total += phone;
   
-  if (total <= ac) {
-    phone = prompt("Enter phone price");
-    phone = Number(phone);
-
+  if (total < threshold) {
     acc = prompt("Enter accessory price");
     acc = Number(acc);
-    
-    phone += acc;
+    total += acc;
   }
 }
 
-alert("Total cost of perchase is: " + total);
+// tax
+
+total += total * TAX_RATE;
+
+console.log("Total Amount: " + total);
+
+if (total > ac) {
+  alert("NOT VIABLE");
+} else {
+  alert("VIABLE");
+}
